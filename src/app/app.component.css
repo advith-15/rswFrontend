@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'PhilipsDisplay';
+    src: url('assets/fonts/philips_display_by_lyricofficial_ddi8ka21.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face{
+    font-family: 'Poppins';
+    src: url('assets/fonts/Poppins-Regular.ttf') format()
+  }
