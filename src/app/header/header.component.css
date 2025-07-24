@@ -30,7 +30,6 @@
 
 .logo {
   font-size: 28px;
-  
   letter-spacing: 1px;
   font-family: 'Philips Display', sans-serif;
 }
@@ -39,10 +38,8 @@
   font-size: 16px;
   font-weight: 300;
   opacity: 0.95;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 
 .action-buttons {
   display: flex;
@@ -102,14 +99,14 @@
   margin-top: 8px;
   background: white;
   color: #333;
-  padding: 10px 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
-  min-width: 100px;
+  min-width: 120px;
   z-index: 1001;
 }
 
@@ -117,7 +114,7 @@
   content: '';
   position: absolute;
   top: -6px;
-  right: 12px;
+  right: 20px;
   width: 12px;
   height: 12px;
   background: white;
@@ -132,11 +129,17 @@
 }
 
 .tooltip-content {
-  text-align: right;
+  text-align: center;
+}
+
+.employee-info {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 6px;
 }
 
 .employee-name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 4px;
@@ -147,6 +150,66 @@
   color: #7f8c8d;
   font-weight: 400;
 }
+
+.tooltip-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tooltip-action {
+  display: flex;
+  align-items: left;
+  gap: 0px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #495057;
+}
+
+.tooltip-action:hover {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.feedback-action {
+  color: #1565c0;
+}
+
+.feedback-action:hover {
+  background-color: #a5dcf45d;
+  color: #1565c0;
+}
+
+.logout-action {
+  color: #dc3545;
+}
+
+.logout-action:hover {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.action-icon {
+  font-size: 16px;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+}
+
+/* .feedback-icon::before {
+  content: '💬';
+}
+
+.power-icon::before {
+  content: '⚡';
+} */
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -170,7 +233,7 @@
 
   .profile-tooltip {
     right: -20px;
-    min-width: 160px;
+    min-width: 200px;
   }
 }
 
@@ -181,5 +244,10 @@
 
   .action-buttons {
     gap: 8px;
+  }
+
+  .profile-tooltip {
+    right: -40px;
+    min-width: 180px;
   }
 }

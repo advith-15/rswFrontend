@@ -1,39 +1,46 @@
 <header class="header">
-    <div class="header-content">
-      <!-- Logo and Title -->
-      <div class="logo-section">
-        <div class="logo">PHILIPS</div>
-        <div class="title">Remote Service Workspot</div>
-      </div>
+  <div class="header-content">
+    <!-- Logo and Title -->
+    <div class="logo-section">
+      <div class="logo">PHILIPS</div>
+      <div class="title">Remote Service Workspot</div>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="help-btn" (click)="onHelpClick()">
+        <span class="help-icon">?</span>
+      </button>
       
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <!-- Help Button -->
-        <button 
-          class="help-btn" 
-          (click)="onHelpClick()"
-          title="Help">
-          <span class="help-icon">?</span>
-        </button>
+      <div class="profile-container">
+        <button class="profile-btn" (click)="onProfileClick()" title="Profile">
+            <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" 
+                 viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+              <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+            </svg>
+          </button>
         
-        <!-- Profile Button -->
-        <div class="profile-container">
-            <button class="profile-btn" (click)="onProfileClick()" title="Profile">
-                <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" 
-                     viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-                </svg>
-              </button>
-              
-          
-          <!-- Tooltip -->
-          <div class="profile-tooltip">
-            <div class="tooltip-content">
+        <div class="profile-tooltip">
+          <div class="tooltip-content">
+            <div class="employee-info">
               <div class="employee-name">{{ employeeName }}</div>
               <div class="employee-id">Emp ID: {{ employeeId }}</div>
+            </div>
+            
+            <div class="tooltip-actions">
+              <div class="tooltip-action feedback-action" (click)="onFeedbackClick()">
+                <span class="action-icon feedback-icon"></span>
+                <span >My Profile</span>
+              </div>
+              
+              <div class="tooltip-action logout-action" (click)="onLogoutClick()">
+                <span class="action-icon power-icon"></span>
+                <span>Logout</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+
+  

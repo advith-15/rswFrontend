@@ -23,4 +23,22 @@ export class HeaderComponent {
     console.log('Help clicked');
     // You can add help modal or navigation logic here
   }
+
+  onFeedbackClick() {
+    // Handle feedback click action
+    console.log('Feedback clicked');
+    // You can add feedback modal or navigation logic here
+    // Example: open feedback modal, navigate to feedback page, etc.
+  }
+
+  onLogoutClick() {
+    // Handle logout click action
+    console.log('Logout clicked');
+    // You can add logout logic here
+    // Example: clear user session, navigate to login page, etc.
+    
+    // Example logout implementation:
+    // this.authService.logout();
+    // this.router.navigate(['/login']);
+  }
 }

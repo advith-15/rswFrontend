@@ -1,3 +1,17 @@
-<app-header> </app-header>
-<app-status-bar> </app-status-bar>
+<div class="app-container">
+  <app-header></app-header>
+  <app-status-bar></app-status-bar>
 
+  <div *ngIf="!isServicePlanRoute()">
+    <div class="main-layout">
+      <div class="filters-sidebar">
+        <app-filters (filtersChanged)="onFiltersChanged($event)"></app-filters>
+      </div>
+      <div class="results-container">
+        <app-search-results [activeFilters]="currentFilters"></app-search-results>
+      </div>
+    </div>
+  </div>
+
+  <router-outlet *ngIf="isServicePlanRoute()"></router-outlet>
+</div>

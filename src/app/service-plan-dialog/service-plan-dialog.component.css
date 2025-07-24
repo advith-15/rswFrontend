@@ -1,0 +1,65 @@
+/* --- Main Dialog Content --- */
+.dialog-content-wrapper {
+  padding-top: 6px;
+}
+
+/* MODIFIED: Ensure dialog content scrolls when it overflows 
+*/
+:host ::ng-deep .mat-mdc-dialog-content {
+  max-height: 65vh; 
+  overflow-y: auto;   
+  padding-right: 16px; 
+}
+
+
+.part-item {
+  display: block !important;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.part-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Part Header (Number and Name) --- */
+.part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.part-number {
+  font-weight: 600;
+  color: #1a73e8; /* Blue color to match app theme */
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+.part-name {
+  font-weight: 500;
+  color: #3c4043;
+  text-align: right;
+}
+
+/* --- Visual Divider --- */
+.item-divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 12px 0;
+}
+
+/* --- Part Summary Text --- */
+
+
+/* --- Dialog Action Buttons --- */
+.dialog-actions-container {
+    padding: 8px 24px; /* Add some padding to the actions area */
+    gap: 8px; /* Add a small gap between the buttons */
+}

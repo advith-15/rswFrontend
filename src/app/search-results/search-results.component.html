@@ -1,0 +1,155 @@
+<div class="search-results-container">
+  <div class="search-bar-container">
+    <div class="search-input-wrapper">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="updateSuggestions()"
+        (focus)="updateSuggestions()"
+        (blur)="showSuggestions=false"
+        (keyup.enter)="onSearch()"
+        placeholder="Enter search text"
+        class="search-input"
+        autocomplete="off">
+      
+      <button class="search-button" (click)="onSearch()">
+        <i class="search-icon"><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="10"
+          height="10"
+          fill="currentColor"
+          viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 4 4 0 0 1 0 10z"/>
+        </svg>
+        </i>
+      </button>
+
+      <div class="suggestions-container" *ngIf="showSuggestions && suggestions.length > 0">
+        <div 
+          class="suggestion-item"
+          *ngFor="let suggestion of suggestions" 
+          (mousedown)="selectSuggestion(suggestion)">
+          {{ suggestion }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <div class="results-header">
+      <div class="results-info">
+        <span class="results-count">Displaying {{ getCurrentPageResults().length }} of {{ filteredResults.length }} results</span>
+        <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+        <span class="selection-info" *ngIf="selectionService.getSelectedCount() > 0">
+          {{ selectionService.getSelectedCount() }} item(s) selected
+        </span>
+      </div>
+      <div class="header-controls">
+        <div class="selection-controls">
+          <button
+            class="selection-btn"
+            (click)="toggleSelectAll()"
+            [class.active]="isAllCurrentPageSelected()">
+            {{ isAllCurrentPageSelected() ? 'Deselect All' : 'Select All' }}
+          </button>
+          <button
+            class="selection-btn clear-btn"
+            (click)="selectionService.clearSelection()"
+            *ngIf="selectionService.getSelectedCount() > 0">
+            Clear All
+          </button>
+        </div>
+        <div class="sort-controls">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select" [(ngModel)]="sortBy" (change)="onSortChange()" class="sort-select">
+            <option *ngFor="let option of sortOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-grid-container">
+      <div class="results-grid">
+        <div
+          *ngFor="let result of getCurrentPageResults()"
+          class="result-card"
+          [class.selected]="selectionService.isSelected(result)"
+          (mouseenter)="onCardHover(result.id)"
+          (mouseleave)="onCardLeave()">
+
+          <div class="checkbox-container" (click)="$event.stopPropagation()">
+            <input
+              type="checkbox"
+              [id]="'checkbox-' + result.id"
+              [checked]="selectionService.isSelected(result)"
+              (change)="onCheckboxChange(result, $event)"
+              class="result-checkbox">
+            <label [for]="'checkbox-' + result.id" class="checkbox-label"></label>
+          </div>
+
+          <div class="card-header">
+            <div class="part-info">
+              <span class="part-number">🔧 {{ result.partNumber }}</span>
+              <div class="part-details">
+                <span class="part-name">{{ result.name }}</span>
+                <div class="system-model">
+                  <span class="system-info">{{ result.system }}</span>
+                  <span class="model-name">{{ result.modelName }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <div class="comments-section">
+              <strong>Comments:</strong> {{ result.comments }}
+            </div>
+            <div class="notes-section">
+              <strong>Notes:</strong> {{ result.notes }}
+            </div>
+          </div>
+
+          <div class="summary-overlay" *ngIf="hoveredCard === result.id">
+            <div class="summary-content">
+              <h4>Summary</h4>
+              <p>{{ result.summary }}</p>
+              <div class="summary-details">
+                <span><strong>Release Date:</strong> {{ result.releaseDate }}</span>
+                <span><strong>System:</strong> {{ result.system }} {{ result.modelName }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+      <button
+        class="pagination-btn"
+        [disabled]="currentPage === 1"
+        (click)="goToPage(currentPage - 1)">
+        Previous
+      </button>
+
+      <div class="page-numbers">
+        <button
+          *ngFor="let page of getPageNumbers()"
+          class="page-btn"
+          [class.active]="page === currentPage"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </div>
+
+      <button
+        class="pagination-btn"
+        [disabled]="currentPage === totalPages"
+        (click)="goToPage(currentPage + 1)">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

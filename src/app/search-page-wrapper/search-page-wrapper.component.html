@@ -1,0 +1,5 @@
+<div>
+    <app-filters (filtersChanged)="onFiltersUpdated($event)"></app-filters>
+  
+    <app-search-results [activeFilters]="currentFilters"></app-search-results>
+  </div>

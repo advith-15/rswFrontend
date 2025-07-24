@@ -1,0 +1,195 @@
+<div class="filters-container" (click)="onDocumentClick($event)">
+  <div class="filters-header">
+    <h3 class="filters-title">Contextual Filters</h3>
+  </div>
+
+  <div class="filters-section">
+    <div class="filter-group">
+      <label class="filter-label">Cart Type</label>
+      <div class="filter-dropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown-trigger" (click)="toggleDropdown('cartType')">
+          <span class="selected-value">{{ filters.cartType || 'Select' }}</span>
+          <svg class="dropdown-arrow" [class.rotated]="dropdownStates.cartType" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke="currentColor" fill="none"/>
+          </svg>
+        </div>
+        <div class="dropdown-menu" [class.active]="dropdownStates.cartType">
+          <div class="dropdown-option" *ngFor="let option of cartTypeOptions" (click)="selectOption('cartType', option)" [class.selected]="filters.cartType === option">
+            {{ option }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Model Number</label>
+      <div class="filter-dropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown-trigger" (click)="toggleDropdown('modelNumber')">
+          <span class="selected-value">{{ filters.modelNumber || 'Select' }}</span>
+          <svg class="dropdown-arrow" [class.rotated]="dropdownStates.modelNumber" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke="currentColor" fill="none"/>
+          </svg>
+        </div>
+        <div class="dropdown-menu" [class.active]="dropdownStates.modelNumber">
+          <div class="dropdown-option" *ngFor="let option of modelNumberOptions" (click)="selectOption('modelNumber', option)" [class.selected]="filters.modelNumber === option">
+            {{ option }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button class="apply-button" (click)="applyFilters()">Go</button>
+    </div>
+  </div>
+
+  <div class="filters-section facet-section">
+    <div class="filters-header">
+      <h3 class="filters-title">Facet Filters</h3>
+    </div>
+
+    <div class="filter-group" *ngFor="let field of [
+      { key: 'assemblyName', label: 'Assembly Name', options: assemblyNameOptions },
+      { key: 'modality', label: 'Modality', options: modalityOptions },
+      { key: 'partNumber', label: 'Part Number', options: partNumberOptions }
+    ]">
+      <label class="filter-label">{{ field.label }}</label>
+      <div class="filter-dropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown-trigger" (click)="toggleDropdown(field.key)">
+          <span class="selected-value">{{ getFilterValue(field.key) || 'Select' }}</span>
+          <svg class="dropdown-arrow" [class.rotated]="isDropdownOpen(field.key)" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke="currentColor" fill="none"/>
+          </svg>
+        </div>
+        <div class="dropdown-menu" [class.active]="isDropdownOpen(field.key)">
+          <div class="dropdown-option" *ngFor="let option of field.options" (click)="selectOption(field.key, option)" [class.selected]="isFilterSelected(field.key, option)">
+            {{ option }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-group" *ngFor="let field of [
+      { key: 'forwardUpgradable', label: 'Forward Upgradable' },
+      { key: 'backwardCompatible', label: 'Backward Compatible' }
+    ]">
+      <label class="filter-label">{{ field.label }}</label>
+      <div class="filter-dropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown-trigger" (click)="toggleDropdown(field.key)">
+          <span class="selected-value">
+            {{ getFilterValue(field.key) === null ? 'Select' : (getFilterValue(field.key) ? 'Yes' : 'No') }}
+          </span>
+          <svg class="dropdown-arrow" [class.rotated]="isDropdownOpen(field.key)" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke="currentColor" fill="none"/>
+          </svg>
+        </div>
+        <div class="dropdown-menu" [class.active]="isDropdownOpen(field.key)">
+          <div class="dropdown-option" (click)="selectOption(field.key, true)" [class.selected]="isFilterSelected(field.key, true)">Yes</div>
+          <div class="dropdown-option" (click)="selectOption(field.key, false)" [class.selected]="isFilterSelected(field.key, false)">No</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="action-button clear-filters" (click)="clearFilters()">
+    <svg class="button-icon" viewBox="0 0 24 24">
+        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke="currentColor" fill="none" />
+        <path d="M15 9l-6 6M9 9l6 6" stroke-width="2" stroke="currentColor" fill="none" />
+    </svg>
+    Clear All Filters
+  </button>
+
+  <div class="action-buttons">
+    <button class="action-button create-plan" (click)="onCreateServicePlanClick()">
+      <svg class="button-icon" viewBox="0 0 24 24">
+        <path d="M12 4v16m8-8H4" stroke-width="2" stroke="currentColor" fill="none"/>
+      </svg>
+      Create Service Plan
+    </button>
+    <button class="action-button add-to-plan" (click)="onAddToServicePlanClick()">
+      <svg class="button-icon" viewBox="0 0 24 24">
+        <path d="M12 6v12m-6-6h12" stroke-width="2" stroke="currentColor" fill="none"/>
+      </svg>
+      Add to Service Plan
+    </button>
+    
+    <button class="action-button feedback-button" (click)="onGiveFeedbackClick()">
+      <svg class="button-icon" viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-width="2" stroke="currentColor" fill="none"/>
+      </svg>
+      Give Feedback
+    </button>
+  </div>
+</div>
+
+<div class="feedback-overlay" *ngIf="showFeedbackDialog" (click)="closeFeedbackDialog()">
+  <div class="feedback-dialog gradient-bg" (click)="$event.stopPropagation()">
+    <div class="feedback-header">
+      <h3 class="feedback-title">📬 Submit Feedback</h3>
+      <button class="close-button" (click)="closeFeedbackDialog()">
+        <svg viewBox="0 0 24 24" class="close-icon">
+          <path d="M18 6l-12 12M6 6l12 12" stroke-width="2" stroke="currentColor" fill="none" />
+        </svg>
+      </button>
+    </div>
+    <form class="feedback-content" (ngSubmit)="submitFeedback()" novalidate>
+      <div class="feedback-section">
+        <label class="feedback-label">Category <span class="required">*</span></label>
+        <select class="feedback-select" [(ngModel)]="feedbackData.category" name="category" required>
+          <option value="">-- Select --</option>
+          <option value="technical">Technical Issue</option>
+          <option value="data">Incorrect Data</option>
+          <option value="ux">UI/UX Suggestion</option>
+          <option value="performance">Performance Concern</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="feedback-section">
+        <label class="feedback-label">Description <span class="required">*</span></label>
+        <textarea [(ngModel)]="feedbackData.description"
+                  name="description"
+                  class="feedback-textarea"
+                  rows="4"
+                  placeholder="Clearly describe the issue or suggestion..."
+                  required></textarea>
+      </div>
+      <div class="feedback-section">
+        <label class="feedback-label">Impact Level <span class="required">*</span></label>
+        <select class="feedback-select" [(ngModel)]="feedbackData.impact" name="impact" required>
+          <option value="">-- Select --</option>
+          <option value="low">Low – Minor inconvenience</option>
+          <option value="medium">Medium – Affects usability</option>
+          <option value="high">High – Blocks major functions</option>
+        </select>
+      </div>
+      <div class="feedback-section">
+        <label class="feedback-label">Urgency</label>
+        <select class="feedback-select" [(ngModel)]="feedbackData.urgency" name="urgency">
+          <option value="">-- Optional --</option>
+          <option value="not_urgent">Not Urgent</option>
+          <option value="week">Within a Week</option>
+          <option value="asap">ASAP</option>
+        </select>
+      </div>
+      <div class="feedback-section">
+        <label class="feedback-label">Your Role</label>
+        <input [(ngModel)]="feedbackData.role"
+               name="role"
+               class="feedback-input"
+               type="text"
+               placeholder="e.g., Remote Engineer, Field Engineer" />
+      </div>
+      <div class="feedback-section">
+        <label class="feedback-label">Contact Email (optional)</label>
+        <input [(ngModel)]="feedbackData.contact"
+               name="contact"
+               class="feedback-input"
+               type="email"
+               placeholder="you@example.com" />
+      </div>
+      <div class="feedback-actions">
+        <button class="feedback-button-secondary" type="button" (click)="closeFeedbackDialog()">Cancel</button>
+        <button class="feedback-button-primary philips-blue" type="submit">Submit Feedback</button>
+      </div>
+    </form>
+  </div>
+</div>

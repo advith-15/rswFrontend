@@ -1,77 +1,64 @@
 <div class="status-bar">
-    <!-- Top Section -->
-    <div class="top-section">
-      <!-- System ID with printer icon -->
-      <div class="system-id-section">
-        <div class="system-id-btn">
-          {{ systemId }}
-          <svg class="parts-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-            <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94s-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.11-0.61l-1.92-3.32c-0.12-0.21-0.39-0.3-0.61-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.5,2.81C14.47,2.58,14.27,2.42,14.03,2.42h-4.06c-0.24,0-0.44,0.16-0.47,0.39l-0.38,2.38c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.09-0.49,0.01-0.61,0.22L2.72,8.87c-0.12,0.21-0.07,0.48,0.11,0.61l2.03,1.58C4.82,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.11,0.61l1.92,3.32c0.12,0.21,0.39,0.3,0.61,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.38,2.38c0.03,0.23,0.23,0.39,0.47,0.39h4.06c0.24,0,0.44-0.16,0.47-0.39l0.38-2.38c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.09,0.49-0.01,0.61-0.22l1.92-3.32c0.12-0.21,0.07-0.48-0.11-0.61L19.14,12.94z M12,15.6c-1.99,0-3.6-1.61-3.6-3.6s1.61-3.6,3.6-3.6s3.6,1.61,3.6,3.6S13.99,15.6,12,15.6z"/>
-          </svg>          
-        </div>
-      </div>
-  
-      <!-- System Details Grid -->
-      <div class="details-grid">
-        <div class="detail-item">
-          <span class="label">Active Contract</span>
-          <span class="value">
-            <span class="status-indicator" [class.active]="activeContract"></span>
-            {{ activeContract ? 'Yes' : 'No' }}
-          </span>
-        </div>
-        <div class="detail-item">
-          <span class="label">Serial #</span>
-          <span class="value">{{ serialNumber }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">System Type</span>
-          <span class="value">{{ systemType }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">Model Name</span>
-          <span class="value">{{ modelName }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">Model #</span>
-          <span class="value">{{ modelNumber }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="label">Cart Type</span>
-          <span class="value">{{ cartType }}</span>
-        </div>
+  <div class="top-section">
+    <div class="system-id-section">
+      <div class="system-id-btn">
+        {{ systemId }}
+        <svg class="parts-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+          <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94s-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.11-0.61l-1.92-3.32c-0.12-0.21-0.39-0.3-0.61-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.5,2.81C14.47,2.58,14.27,2.42,14.03,2.42h-4.06c-0.24,0-0.44,0.16-0.47,0.39l-0.38,2.38c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.09-0.49,0.01-0.61,0.22L2.72,8.87c-0.12,0.21-0.07,0.48,0.11,0.61l2.03,1.58C4.82,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.11,0.61l1.92,3.32c0.12,0.21,0.39,0.3,0.61,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.38,2.38c0.03,0.23,0.23,0.39,0.47,0.39h4.06c0.24,0,0.44-0.16,0.47-0.39l0.38-2.38c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.09,0.49-0.01,0.61-0.22l1.92-3.32c0.12-0.21,0.07-0.48-0.11-0.61L19.14,12.94z M12,15.6c-1.99,0-3.6-1.61-3.6-3.6s1.61-3.6,3.6-3.6s3.6,1.61,3.6,3.6S13.99,15.6,12,15.6z"/>
+        </svg>
       </div>
     </div>
-  
-    <!-- Location -->
-    <div class="location-section">
-      <span class="location-text">{{ location }}</span>
-    </div>
-  
-    <!-- Bottom Section -->
-    <div class="bottom-section">
-      <!-- Case Number -->
-      <div class="case-number-section">
-        <span class="case-label">Case #</span>
-        <span class="case-number">{{ caseNumber }}</span>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <span class="label">Active Contract</span>
+        <span class="value">
+          <span class="status-indicator" [class.active]="activeContract"></span>
+          {{ activeContract ? 'Yes' : 'No' }}
+        </span>
       </div>
-  
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button class="action-btn log-viewer" (click)="onLogViewerClick()">
-          Log Viewer
-        </button>
-        <button class="action-btn prs-portal" (click)="onOpenInPRSPortalClick()">
-          Open in PRS Portal
-        </button>
-        <button class="action-btn history-analyser" (click)="onCaseHistoryAnalyserClick()">
-          Case History Analyser
-        </button>
-        <button class="print-btn" (click)="onPrintClick()">
-          <svg class="print-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
-          </svg>
-        </button>
+      <div class="detail-item">
+        <span class="label">Serial #</span>
+        <span class="value">{{ serialNumber }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">System Type</span>
+        <span class="value">{{ systemType }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Model Name</span>
+        <span class="value">{{ modelName }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Model #</span>
+        <span class="value">{{ modelNumber }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Cart Type</span>
+        <span class="value">{{ cartType }}</span>
       </div>
     </div>
   </div>
+
+  <div class="location-section">
+    <span class="location-text">{{ location }}</span>
+  </div>
+
+  <div class="bottom-section">
+    <div class="case-number-section">
+      <span class="case-label">Case #</span>
+      <span class="case-number">{{ caseNumber }}</span>
+    </div>
+
+    <div class="action-buttons">
+      <button class="action-btn log-viewer" (click)="onLogViewerClick()">Log Viewer</button>
+      <button class="action-btn prs-portal" (click)="onOpenInPRSPortalClick()">Open in PRS Portal</button>
+      <button class="action-btn history-analyser" (click)="onCaseHistoryAnalyserClick()">Case History Analyser</button>
+      <button class="print-btn" (click)="onPrintClick()" [disabled]="selectedParts.length === 0" [title]="selectedParts.length > 0 ? 'Print ' + selectedParts.length + ' selected item(s)' : 'No items selected to print'">
+        <svg class="print-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
